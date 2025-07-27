@@ -25,7 +25,15 @@ load_dotenv()
 
 
 # LLM 配置
-LLM_CFG = {
+# DashScope
+DASHSCOPE_LLM_CFG = {
+    'model': 'qwen3-coder-plus',  # qwen-plus / qwen-turbo
+    'model_server': os.getenv("DASHSCOPE_BASE_URL"),
+    'api_key': os.getenv("DASHSCOPE_API_KEY")
+}
+
+# DeepSeek
+DEEPSEEK_LLM_CFG = {
     'model': 'deepseek-reasoner',  # deepseek-chat / deepseek-reasoner
     'model_server': os.getenv("DEEPSEEK_BASE_URL"),
     'api_key': os.getenv("DEEPSEEK_API_KEY")
@@ -47,7 +55,7 @@ def create_react_agent(llm_cfg, db_config):
     return react_agent
 
 
-my_bot = create_react_agent(LLM_CFG, DB_CONFIG)
+my_bot = create_react_agent(DASHSCOPE_LLM_CFG, DB_CONFIG)
 
 
 def generate_response(message, history, max_history=6):
@@ -75,7 +83,7 @@ def generate_response(message, history, max_history=6):
 
 
 if __name__ == "__main__":
-    model_name = LLM_CFG['model']
+    model_name = DASHSCOPE_LLM_CFG['model']
     demo = create_ui(llm_func=generate_response,
                      tab_name="Gradio APP - ClickHouse Agent",
                      main_title="ClickHouse Agent Demo",

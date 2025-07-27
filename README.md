@@ -23,11 +23,16 @@ CH_PASSWORD=[YOUR_CLICKHOUSE_PASSWORD]
 CH_DATABASE=entertainment
 DEEPSEEK_BASE_URL=https://api.deepseek.com
 DEEPSEEK_API_KEY=[YOUR_DEEPSEEK_API_KEY]
+DASHSCOPE_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
+DASHSCOPE_API_KEY=[YOUR_DASHSCOPE_API_KEY]
 ```
 
-> **Note:** 请先在项目根目录下创建 `.env` 文件
+> **Note:** 请在项目根目录下创建 `.env` 文件
 
 ## 三、本地运行
+
+> [!NOTE]
+> 运行前，需要先安装 ClickHouse 数据库，然后导入可供查询的数据。这些步骤可以参考[《耶是 ClickHouse！我们有救了！！》](https://mp.weixin.qq.com/s/MO0l_bQ2ET_FnerLrFtUEA)，里面有详细记录。完成这些步骤之后，记得把配置信息写入 `.env`，以便 Agent 访问这些信息。
 
 启动 Gradio：
 
@@ -46,6 +51,3 @@ python gradio_ch_agent.py
 - 评分人数超过一万人的动画中，排名前 5 的是？
 - 2023 年开始播出的动画有多少？
 - 制作超过 15 部动漫的工作室有哪些？
-
-> [!NOTE]
-> 如果你希望了解 如何安装 ClickHouse 数据库，以及 如何向 ClickHouse 数据库导入数据，可以参考我的文章[《耶是 ClickHouse！我们有救了！！》](https://luochang212.github.io/posts/chat_to_clickhouse/)
