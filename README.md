@@ -1,6 +1,6 @@
 # chat-to-clickhouse
 
-一个可以访问 [ClickHouse](https://github.com/ClickHouse/ClickHouse) 数据库的 ChatBI。
+一个可以访问 [ClickHouse](https://github.com/ClickHouse/ClickHouse) 的、带 WebUI 的 Agent。
 
 ## 一、技术栈
 
@@ -32,11 +32,7 @@ DEEPSEEK_API_KEY=[YOUR_DEEPSEEK_API_KEY]
 启动 Gradio：
 
 ```bash
-# 一个 Chat APP，无法连接数据库
-nohup python gradio_app.py
-
-# 一个简单的 ChatBI，可以连接 ClickHouse 数据库
-nohup python gradio_ch_agent.py
+python gradio_ch_agent.py
 ```
 
 启动后，打开浏览器访问 [http://localhost:7860/](http://localhost:7860/)
