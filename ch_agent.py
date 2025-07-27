@@ -116,12 +116,12 @@ if __name__ == '__main__':
         "password": os.getenv("CH_PASSWORD"),
     }
 
-    # 实例化 PGAgent
-    pga = CHAgent(llm_cfg, db_config)
+    # 实例化 CHAgent
+    cha = CHAgent(llm_cfg, db_config)
 
     # 创建一个 Agent
-    react_agent = pga.create_react_agent()
-    # assistant_agent = pga.create_assistant_agent()
+    react_agent = cha.create_react_agent()
+    # assistant_agent = cha.create_assistant_agent()
 
     # 使用 Agent 查询数据库
     query = "咱们都有哪些表，表里都有啥字段"
@@ -131,5 +131,5 @@ if __name__ == '__main__':
             'content': query
         }
     ]
-    answer = pga.ask(react_agent, messages)
+    answer = cha.ask(react_agent, messages)
     print(answer)
