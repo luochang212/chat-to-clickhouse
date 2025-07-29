@@ -110,10 +110,10 @@ if __name__ == '__main__':
 
     # 数据库配置
     db_config = {
-        "host": os.getenv("CH_HOST"),
-        "port": os.getenv("CH_PORT"),
-        "user": os.getenv("CH_USER"),
-        "password": os.getenv("CH_PASSWORD"),
+        "host": os.getenv("CLICKHOUSE_HOST"),
+        "port": os.getenv("CLICKHOUSE_PORT"),
+        "user": os.getenv("CLICKHOUSE_USER"),
+        "password": os.getenv("CLICKHOUSE_PASSWORD"),
     }
 
     # 实例化 CHAgent

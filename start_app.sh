@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # 一个 Chat APP，无法连接数据库
 nohup python gradio_app.py > ./log/gradio_app.log 2>&1 &
 

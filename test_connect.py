@@ -12,11 +12,11 @@ load_dotenv()
 
 # 创建 ClickHouse 客户端连接
 client = clickhouse_connect.get_client(
-    host=os.getenv("CH_HOST"),          # Docker 宿主机 IP
-    port=os.getenv("CH_PORT"),          # ClickHouse HTTP 端口
-    username=os.getenv("CH_USER"),      # 用户名
-    password=os.getenv("CH_PASSWORD"),  # 密码
-    database=os.getenv("CH_DATABASE")   # 数据库名
+    host=os.getenv("CLICKHOUSE_HOST"),          # Docker 宿主机 IP
+    port=os.getenv("CLICKHOUSE_PORT"),          # ClickHouse HTTP 端口
+    username=os.getenv("CLICKHOUSE_USER"),      # 用户名
+    password=os.getenv("CLICKHOUSE_PASSWORD"),  # 密码
+    database=os.getenv("CLICKHOUSE_DATABASE")   # 数据库名
 )
 
 query = "SELECT * FROM entertainment.anime_info LIMIT 3"

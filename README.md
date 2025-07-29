@@ -16,11 +16,16 @@ LLM 和 数据库 的配置在 `.env` 文件中，按律不上传。
 它的格式如下：
 
 ```
-CH_HOST=localhost
-CH_PORT=18123
-CH_USER=admin
-CH_PASSWORD=[YOUR_CLICKHOUSE_PASSWORD]
-CH_DATABASE=entertainment
+CLICKHOUSE_HOST=localhost
+CLICKHOUSE_PORT=18123
+CLICKHOUSE_USER=admin
+CLICKHOUSE_PASSWORD=[YOUR_CLICKHOUSE_PASSWORD]
+CLICKHOUSE_DATABASE=entertainment
+CLICKHOUSE_MCP_SERVER_TRANSPORT=sse
+CLICKHOUSE_MCP_BIND_HOST=0.0.0.0
+CLICKHOUSE_MCP_BIND_PORT=8760
+CLICKHOUSE_SECURE=false
+CLICKHOUSE_VERIFY=false
 DEEPSEEK_BASE_URL=https://api.deepseek.com
 DEEPSEEK_API_KEY=[YOUR_DEEPSEEK_API_KEY]
 DASHSCOPE_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
@@ -51,3 +56,48 @@ python gradio_ch_agent.py
 - 评分人数超过一万人的动画中，排名前 5 的是？
 - 2023 年开始播出的动画有多少？
 - 制作超过 15 部动漫的工作室有哪些？
+
+## 四、MCP 启动方式
+
+本仓库默认通过 `stdio` 的方式启动。如您想通过 `sse` 的方式启动 MCP Server：
+
+**1）启动 SSE 服务**
+
+安装 `mcp-clickhouse` 包：
+
+```bash
+pip install mcp-clickhouse
+```
+
+启动 MCP Server：
+
+```bash
+source .env && python -m mcp_clickhouse.main
+```
+
+验证服务是否正常启动：
+
+```bash
+curl http://localhost:8760/health
+```
+
+**2）修改 Agent 代码**
+
+请将 [ch_agent.py](./ch_agent.py) 中的 `create_tools` 函数，用以下代码替换：
+
+```python
+    def create_tools(self):
+        """获取工具列表"""
+
+        tools = [
+            {
+                "mcpServers": {
+                    "mcp-clickhouse": {
+                        "url": "http://localhost:8760/sse"
+                    }
+                }
+            },
+        ]
+
+        return tools
+```
